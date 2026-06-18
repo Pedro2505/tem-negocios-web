@@ -1,111 +1,350 @@
-:root {
-  --text: #6b6375;
-  --text-h: #08060d;
-  --bg: #fff;
-  --border: #e5e4e7;
-  --code-bg: #f4f3ec;
-  --accent: #aa3bff;
-  --accent-bg: rgba(170, 59, 255, 0.1);
-  --accent-border: rgba(170, 59, 255, 0.5);
-  --social-bg: rgba(244, 243, 236, 0.5);
-  --shadow:
-    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
-
-  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --mono: ui-monospace, Consolas, monospace;
-
-  font: 18px/145% var(--sans);
-  letter-spacing: 0.18px;
-  color-scheme: light dark;
-  color: var(--text);
-  background: var(--bg);
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-
-  @media (max-width: 1024px) {
-    font-size: 16px;
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --text: #9ca3af;
-    --text-h: #f3f4f6;
-    --bg: #16171d;
-    --border: #2e303a;
-    --code-bg: #1f2028;
-    --accent: #c084fc;
-    --accent-bg: rgba(192, 132, 252, 0.15);
-    --accent-border: rgba(192, 132, 252, 0.5);
-    --social-bg: rgba(47, 48, 58, 0.5);
-    --shadow:
-      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
-  }
-
-  #social .button-icon {
-    filter: invert(1) brightness(2);
-  }
+/* --- RESET GLOBAL --- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 body {
-  margin: 0;
+  background-color: #f8fafc;
+  color: #333;
 }
 
-#root {
-  width: 1126px;
-  max-width: 100%;
-  margin: 0 auto;
-  text-align: center;
-  border-inline: 1px solid var(--border);
-  min-height: 100svh;
+:root {
+  --azul-marinho: #0A192F;
+  --teal-accent: #008080;
+  --prata: #C0C0C0;
+}
+
+/* --- NAVBAR --- */
+.navbar {
   display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--azul-marinho);
+  padding: 1rem 5%;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
-h1,
-h2 {
-  font-family: var(--heading);
+.logo-nav {
+  height: 50px;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
   font-weight: 500;
-  color: var(--text-h);
+  transition: color 0.3s;
 }
 
-h1 {
-  font-size: 56px;
-  letter-spacing: -1.68px;
-  margin: 32px 0;
-  @media (max-width: 1024px) {
-    font-size: 36px;
-    margin: 20px 0;
-  }
-}
-h2 {
-  font-size: 24px;
-  line-height: 118%;
-  letter-spacing: -0.24px;
-  margin: 0 0 8px;
-  @media (max-width: 1024px) {
-    font-size: 20px;
-  }
-}
-p {
-  margin: 0;
+.nav-links a:hover {
+  color: var(--teal-accent);
 }
 
-code,
-.counter {
-  font-family: var(--mono);
-  display: inline-flex;
-  border-radius: 4px;
-  color: var(--text-h);
+/* --- HERO DIVIDIDO --- */
+.hero-dividido {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 70vh;
+  background: linear-gradient(135deg, var(--azul-marinho) 0%, #004545 100%);
+  padding: 0 10%;
+  color: white;
 }
 
-code {
-  font-size: 15px;
-  line-height: 135%;
-  padding: 4px 8px;
-  background: var(--code-bg);
+.hero-texto {
+  flex: 1;
+  max-width: 600px;
+}
+
+.hero-texto h1 {
+  font-size: 3.5rem;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+}
+
+.hero-texto p {
+  font-size: 1.2rem;
+  color: #cbd5e1;
+}
+
+.hero-imagem {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.logo-gigante {
+  height: 280px;
+  filter: drop-shadow(0 20px 30px rgba(0,0,0,0.4));
+  animation: flutuar 4s ease-in-out infinite;
+}
+
+@keyframes flutuar {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+}
+
+/* --- BARRA DE BUSCA (EFEITO VIDRO / GLASSMORPHISM) --- */
+.busca-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: -35px;
+  padding: 0 2rem;
+  position: relative;
+  z-index: 10;
+}
+
+.busca-form {
+  display: flex;
+  width: 100%;
+  max-width: 800px;
+  /* Mágica do Vidro aqui: */
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  padding: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+  gap: 1rem;
+}
+
+.busca-input {
+  flex: 1;
+  padding: 1rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 1rem;
+  outline: none;
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.busca-input:focus {
+  border-color: var(--teal-accent);
+}
+
+.btn-buscar {
+  background-color: var(--teal-accent);
+  color: white;
+  border: none;
+  padding: 0 2rem;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-buscar:hover {
+  background-color: #005a5a;
+  transform: scale(1.02);
+}
+
+/* --- VITRINE DE IMÓVEIS E CARDS --- */
+.vitrine {
+  padding: 5rem 10%;
+  text-align: center;
+}
+
+.vitrine h2 {
+  color: var(--azul-marinho);
+  font-size: 2.2rem;
+  margin-bottom: 3rem;
+}
+
+.grid-imoveis {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.card-imovel {
+  background: white;
+  width: 340px; /* Card um pouco mais largo */
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  transition: all 0.3s ease;
+}
+
+.card-imovel:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+}
+
+/* Imagem e Efeito de Zoom */
+.card-imagem-wrapper {
+  position: relative;
+  overflow: hidden; /* Esconde a foto quando ela dá zoom */
+  height: 220px;
+}
+
+.card-foto-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-bottom: 4px solid var(--teal-accent);
+  transition: transform 0.5s ease;
+}
+
+.card-imovel:hover .card-foto-img {
+  transform: scale(1.1); /* O Zoom suave na foto! */
+}
+
+/* Badge Flutuante */
+.card-badge {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  background-color: var(--azul-marinho);
+  color: white;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  z-index: 2;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+/* Botão de Favoritar Flutuante */
+.btn-favorito {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  border-radius: 50%;
+  width: 38px;
+  height: 38px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.btn-favorito:hover {
+  transform: scale(1.15);
+}
+
+.btn-favorito.ativo {
+  animation: pulsoCoracao 0.3s ease;
+}
+
+@keyframes pulsoCoracao {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.3); }
+  100% { transform: scale(1); }
+}
+
+/* Informações do Card */
+.card-info {
+  padding: 1.5rem;
+  text-align: left;
+}
+
+.card-info h3 { color: var(--azul-marinho); margin-bottom: 0.5rem; font-size: 1.3rem;}
+.local { color: #64748b; font-size: 0.95rem; }
+
+.detalhes-imovel {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 1.2rem 0;
+}
+
+.detalhes-imovel span {
+  background-color: #f1f5f9;
+  color: #475569;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.preco { color: var(--teal-accent); font-size: 1.6rem; font-weight: 800; margin: 1rem 0; }
+
+.btn-detalhes { 
+  width: 100%; 
+  padding: 1rem; 
+  background: #f1f5f9; 
+  border: none; 
+  border-radius: 8px; 
+  font-weight: bold; 
+  cursor: pointer; 
+  transition: all 0.3s; 
+  color: var(--azul-marinho); 
+  font-size: 1rem;
+}
+
+.btn-detalhes:hover { 
+  background: var(--azul-marinho); 
+  color: white; 
+}
+
+/* --- SOBRE A REDE E FOOTER --- */
+.sobre-rede {
+  background-color: white;
+  padding: 5rem 10%;
+  text-align: center;
+}
+
+.sobre-rede h2 {
+  color: var(--azul-marinho);
+  margin-bottom: 1.5rem;
+  font-size: 2rem;
+}
+
+.sobre-rede > p {
+  max-width: 800px;
+  margin: 0 auto 3rem auto;
+  color: #475569;
+  line-height: 1.6;
+}
+
+.sobre-grid {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.sobre-card {
+  background: #f8fafc;
+  padding: 2rem;
+  border-radius: 12px;
+  border-left: 4px solid var(--teal-accent);
+  max-width: 400px;
+  text-align: left;
+}
+
+.sobre-card h3 { color: var(--azul-marinho); margin-bottom: 1rem; }
+.sobre-card p { color: #475569; line-height: 1.5; }
+
+/* Rodapé Premium */
+.footer {
+  background-color: var(--azul-marinho);
+  color: #cbd5e1;
+  text-align: center;
+  padding: 3rem 2rem;
+  margin-top: 2rem;
+}
+
+.footer-logo {
+  height: 40px;
+  margin-bottom: 1rem;
+  opacity: 0.8;
+}
+
+.footer p {
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
 }
